@@ -1,13 +1,16 @@
 ActsAsIsdoc
 ===========
 
-Introduction goes here.
+Plugin for rendering business object in ISDOC format
+
+More informations about ISDOC on http://www.isdoc.org
 
 
 Example
 =======
 
-Example goes here.
+    class SampleInvoice < ActiveRecord::Base
+      acts_as_isdoc
+    end
 
-
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Copyright (c) 2009 Jiri Kubicek, KRAXNET s.r.o., released under the MIT license
