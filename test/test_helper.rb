@@ -35,3 +35,30 @@ def load_schema
   ActiveRecord::Base.establish_connection(config[db_adapter])
   load(File.dirname(__FILE__) + "/schema.rb")
 end
+
+# validation code taken from http://htmltest.googlecode.com/svn/trunk/html_test/lib/validator.rb
+def valid_isdoc?(body)
+  schema = File.join(File.dirname(__FILE__), "..", "schema", "isdoc-invoice-5.1.xsd")
+  error_file = create_tmp_file("xmllint_error")
+  doc_file = command = nil
+  doc_file = create_tmp_file("xmllint", body)
+  command = "xmllint --schema #{schema} --noout #{doc_file} &> #{error_file}"
+  system(command)
+  status = $?.exitstatus
+  if status == 0
+    return true
+  else
+    failure_doc = File.join(Dir::tmpdir, "xmllint_last_response.xml")
+    FileUtils.cp doc_file, failure_doc
+    raise ("command='#{command}'. ISDOC document at '#{failure_doc}'. " +
+      IO.read(error_file))
+  end
+end
+
+private
+def create_tmp_file(name, contents = "")
+  tmp_file = Tempfile.new(name)
+  tmp_file.puts(contents)
+  tmp_file.close
+  tmp_file.path
+end

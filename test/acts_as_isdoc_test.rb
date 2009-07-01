@@ -16,4 +16,9 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
     assert_equal "XML", SampleInvoice.new.render_isdoc
   end
 
+  test "returned isdoc is valid" do
+    flunk 'Not done implementation yet.'
+    assert valid_isdoc?(SampleInvoice.new.render_isdoc)
+  end
+
 end
