@@ -5,7 +5,7 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   load_schema
 
   class SampleInvoice < ActiveRecord::Base
-    acts_as_isdoc
+    acts_as_isdoc :document_type=>:invoice
   end
 
   test "responds_to_render_isdoc" do

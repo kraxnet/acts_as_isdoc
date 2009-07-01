@@ -4,7 +4,9 @@ module ActsAsIsdoc
   end
 
   module ClassMethods
-    def acts_as_isdoc
+    def acts_as_isdoc(options = {})
+      cattr_accessor :document_type
+      self.document_type = options[:document_type]
       send :include, InstanceMethods
     end
   end
