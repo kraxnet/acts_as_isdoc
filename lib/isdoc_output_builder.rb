@@ -1,5 +1,9 @@
 class ISDOCOutputBuilder
-  def initialize(object)
+
+  attr_reader :ledger_item
+
+  def initialize(ledger_item)
+    @ledger_item = ledger_item
   end
 
   def build
@@ -18,11 +22,11 @@ class ISDOCOutputBuilder
       invoice.tag! :RefCurrRate, 1
 
       invoice.tag! :AccountingSupplierParty do |supplier|
-        build_party supplier
+        build_party supplier, sender_details
       end
 
       invoice.tag! :AccountingCustomerParty do |customer|
-        build_party customer
+        build_party customer, customer_details
       end
 
       invoice.tag! :InvoiceLines do |invoice_lines|
@@ -73,7 +77,8 @@ class ISDOCOutputBuilder
     isdoc.target!
   end
 
-  def build_party(xml)
+  def build_party(xml, details)
+    details = details.symbolize_keys
     xml.tag! :Party do |party|
       party.tag! :PartyIdentification do |party_identification|
         party_identification.tag! :UserID
@@ -81,19 +86,27 @@ class ISDOCOutputBuilder
         party_identification.tag! :ID
       end
       party.tag! :PartyName do |party_name|
-        party_name.tag! :Name , ""
+        party_name.tag! :Name, details[:name]
       end
       party.tag! :PostalAddress do |postal_address|
-        postal_address.tag! :StreetName, ""
-        postal_address.tag! :BuildingNumber, ""
-        postal_address.tag! :CityName, ""
-        postal_address.tag! :PostalZone, ""
+        postal_address.tag! :StreetName, details[:street]
+        postal_address.tag! :BuildingNumber, details[:building_number]
+        postal_address.tag! :CityName, details[:city]
+        postal_address.tag! :PostalZone, details[:postal_code]
         postal_address.tag! :Country do |country|
-          country.tag! :IdentificationCode, ""
-          country.tag! :Name, ""
+          country.tag! :IdentificationCode, details[:country_code]
+          country.tag! :Name, details[:country]
         end
       end
+      party.tag! :PartyTaxScheme do |party_tax_scheme|
+        party_tax_scheme.tag! :CompanyID, details[:tax_number]
+        party_tax_scheme.tag! :TaxScheme, "VAT"
+      end if details[:tax_number]
     end
+  end
+
+  def method_missing(method_id, *args, &block)
+    ledger_item.send(method_id)
   end
 
 end
