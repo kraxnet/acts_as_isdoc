@@ -18,7 +18,7 @@ class ISDOCOutputBuilder
 
       invoice.tag! :IssueDate, Date.today.to_s(:db)
 
-      invoice.tag! :LocalCurrencyCode, "XYZ"
+      invoice.tag! :LocalCurrencyCode, local_currency_code
       invoice.tag! :CurrRate, 1
       invoice.tag! :RefCurrRate, 1
 
@@ -108,7 +108,11 @@ class ISDOCOutputBuilder
 
   def method_missing(method_id, *args, &block)
     # method renaming if requested in options
-    method_id = options[method_id.to_sym] if options.has_key?(method_id.to_sym)
+    if options.has_key?(method_id.to_sym)
+      method_id = options[method_id.to_sym]
+      # allows setting default values directly instead of calling a method
+      return method_id unless ledger_item.respond_to?(method_id)
+    end
     ledger_item.send(method_id)
   end
 

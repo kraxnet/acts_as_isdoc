@@ -5,7 +5,9 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   load_schema
 
   class SampleInvoice < ActiveRecord::Base
-    acts_as_isdoc :document_type=>:invoice, :paid_deposits_amount => :paid_deposits
+    acts_as_isdoc :document_type=>:invoice,
+      :paid_deposits_amount => :paid_deposits,
+      :local_currency_code=>"CZK"
 
     def paid_deposits
       300
