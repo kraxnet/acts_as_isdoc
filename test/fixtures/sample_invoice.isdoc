@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Invoice xmlns="http://isdoc.cz/namespace/invoice" version="5.1">
     <DocumentType>1</DocumentType>
-    <ID/>
-    <UUID/>
-    <IssueDate>2009-07-01</IssueDate>
+    <ID>123</ID>
+    <UUID>UUID</UUID>
+    <IssueDate>2000-01-01</IssueDate>
+    <TaxPointDate>1970-01-01</TaxPointDate>
     <LocalCurrencyCode>CZK</LocalCurrencyCode>
     <CurrRate>1</CurrRate>
     <RefCurrRate>1</RefCurrRate>

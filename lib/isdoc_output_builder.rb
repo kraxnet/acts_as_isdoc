@@ -12,11 +12,12 @@ class ISDOCOutputBuilder
     isdoc.instruct! :xml
 
     isdoc.tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/invoice", :version=>"5.1") do |invoice|
-      invoice.tag! :DocumentType, 1
-      invoice.tag! :ID
-      invoice.tag! :UUID
+      invoice.tag! :DocumentType, document_type
+      invoice.tag! :ID, document_id
+      invoice.tag! :UUID, document_uuid
 
-      invoice.tag! :IssueDate, Date.today.to_s(:db)
+      invoice.tag! :IssueDate, issue_date
+      invoice.tag! :TaxPointDate, tax_point_date if tax_point_date
 
       invoice.tag! :LocalCurrencyCode, local_currency_code
       invoice.tag! :CurrRate, 1
@@ -113,7 +114,7 @@ class ISDOCOutputBuilder
       # allows setting default values directly instead of calling a method
       return method_id unless ledger_item.respond_to?(method_id)
     end
-    ledger_item.send(method_id)
+    ledger_item.send(method_id) if ledger_item.respond_to?(method_id)
   end
 
 end
