@@ -8,8 +8,12 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
     acts_as_isdoc :document_type=>:invoice
   end
 
-  test "responds_to_render_isdoc" do
+  test "responds_to render_isdoc" do
     assert SampleInvoice.new.respond_to?(:render_isdoc)
+  end
+
+  test "render_isdoc returns isdoc" do
+    assert_equal "XML", SampleInvoice.new.render_isdoc
   end
 
 end

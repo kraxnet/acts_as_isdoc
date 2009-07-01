@@ -13,6 +13,7 @@ module ActsAsIsdoc
 
   module InstanceMethods
     def render_isdoc
+      ISDOCOutputBuilder.new(self).build
     end
   end
 end
