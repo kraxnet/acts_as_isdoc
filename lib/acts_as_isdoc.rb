@@ -5,15 +5,16 @@ module ActsAsIsdoc
 
   module ClassMethods
     def acts_as_isdoc(options = {})
-      cattr_accessor :document_type
+      cattr_accessor :document_type, :options
       self.document_type = options[:document_type]
+      self.options = options
       send :include, InstanceMethods
     end
   end
 
   module InstanceMethods
     def render_isdoc
-      ISDOCOutputBuilder.new(self).build
+      ISDOCOutputBuilder.new(self, options).build
     end
   end
 end

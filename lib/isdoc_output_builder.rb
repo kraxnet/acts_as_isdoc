@@ -1,9 +1,10 @@
 class ISDOCOutputBuilder
 
-  attr_reader :ledger_item
+  attr_reader :ledger_item, :options
 
-  def initialize(ledger_item)
+  def initialize(ledger_item, options)
     @ledger_item = ledger_item
+    @options = options
   end
 
   def build
@@ -70,7 +71,7 @@ class ISDOCOutputBuilder
         legal_monetary_total.tag! :AlreadyClaimedTaxInclusiveAmount, 0
         legal_monetary_total.tag! :DifferenceTaxExclusiveAmount, 0
         legal_monetary_total.tag! :DifferenceTaxInclusiveAmount, 0
-        legal_monetary_total.tag! :PaidDepositsAmount, 0
+        legal_monetary_total.tag! :PaidDepositsAmount, paid_deposits_amount
         legal_monetary_total.tag! :PayableAmount, 0
       end
     end
@@ -106,6 +107,8 @@ class ISDOCOutputBuilder
   end
 
   def method_missing(method_id, *args, &block)
+    # method renaming if requested in options
+    method_id = options[method_id.to_sym] if options.has_key?(method_id.to_sym)
     ledger_item.send(method_id)
   end
 

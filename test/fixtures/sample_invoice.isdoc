@@ -94,7 +94,7 @@
         <AlreadyClaimedTaxInclusiveAmount>0</AlreadyClaimedTaxInclusiveAmount>
         <DifferenceTaxExclusiveAmount>0</DifferenceTaxExclusiveAmount>
         <DifferenceTaxInclusiveAmount>0</DifferenceTaxInclusiveAmount>
-        <PaidDepositsAmount>0</PaidDepositsAmount>
+        <PaidDepositsAmount>300</PaidDepositsAmount>
         <PayableAmount>0</PayableAmount>
     </LegalMonetaryTotal>
 </Invoice>
