@@ -31,6 +31,10 @@ class ISDOCOutputBuilder
         build_party customer, customer_details
       end
 
+      invoice.tag! :BuyerCustomerParty do |recipient|
+        build_party recipient, recipient_details
+      end if recipient_details
+
       invoice.tag! :InvoiceLines do |invoice_lines_tag|
         build_invoice_lines invoice_lines_tag, invoice_lines
       end

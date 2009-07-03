@@ -61,6 +61,28 @@
             </PostalAddress>
         </Party>
     </AccountingCustomerParty>
+    <BuyerCustomerParty>
+        <Party>
+            <PartyIdentification>
+                <UserID/>
+                <CatalogFirmIdentification/>
+                <ID/>
+            </PartyIdentification>
+            <PartyName>
+                <Name>Frantisek</Name>
+            </PartyName>
+            <PostalAddress>
+                <StreetName></StreetName>
+                <BuildingNumber></BuildingNumber>
+                <CityName></CityName>
+                <PostalZone></PostalZone>
+                <Country>
+                    <IdentificationCode></IdentificationCode>
+                    <Name></Name>
+                </Country>
+            </PostalAddress>
+        </Party>
+    </BuyerCustomerParty>
     <InvoiceLines>
         <InvoiceLine>
             <ID>1</ID>
