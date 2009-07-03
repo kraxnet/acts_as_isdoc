@@ -58,17 +58,19 @@
     </AccountingCustomerParty>
     <InvoiceLines>
         <InvoiceLine>
-            <ID/>
+            <ID>1</ID>
             <LineExtensionAmount>0</LineExtensionAmount>
             <LineExtensionAmountTaxInclusive>0</LineExtensionAmountTaxInclusive>
             <LineExtensionTaxAmount>0</LineExtensionTaxAmount>
             <UnitPrice>0</UnitPrice>
             <UnitPriceTaxInclusive>0</UnitPriceTaxInclusive>
             <ClassifiedTaxCategory>
-                <Percent>0</Percent>
+                <Percent>19</Percent>
                 <VATCalculationMethod>0</VATCalculationMethod>
             </ClassifiedTaxCategory>
-            <Item/>
+            <Item>
+                <Description>First item</Description>
+            </Item>
         </InvoiceLine>
     </InvoiceLines>
     <TaxTotal>
@@ -83,7 +85,7 @@
             <DifferenceTaxAmount>0</DifferenceTaxAmount>
             <DifferenceTaxInclusiveAmount>0</DifferenceTaxInclusiveAmount>
             <TaxCategory>
-                <Percent>0</Percent>
+                <Percent>19</Percent>
             </TaxCategory>
         </TaxSubTotal>
         <TaxAmount>0</TaxAmount>

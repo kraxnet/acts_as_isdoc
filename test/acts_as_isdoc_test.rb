@@ -19,7 +19,6 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
     diff_file = create_tmp_file("diff_file")
     command = "diff #{isdoc_file} #{fixture_file} >> #{diff_file}"
     system(command)
-    status = $?.exitstatus
     assert_equal "\n", File.read(diff_file)
   end
 

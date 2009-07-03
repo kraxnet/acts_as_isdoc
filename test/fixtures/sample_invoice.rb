@@ -26,4 +26,49 @@ class SampleInvoice < ActiveRecord::Base
   def customer_details
     { :name => "Frantisek" }
   end
+
+  def invoice_lines
+    [
+      {:line_extension_amount=>0, :line_extension_amount_tax_inclusive=>0, :line_extension_tax_amount=>0, :unit_price=>0, :unit_price_tax_inclusive=>0, :tax_percent=>19, :vat_calculation_method=>0, :description=>"First item"}
+    ]
+  end
+
+  def tax_exclusive_amount
+    0
+  end
+
+  def tax_inclusive_amount
+    0
+  end
+
+  def already_claimed_tax_exclusive_amount
+    0
+  end
+
+  def already_claimed_tax_inclusive_amount
+    0
+  end
+
+  def difference_tax_exclusive_amount
+    0
+  end
+
+  def difference_tax_inclusive_amount
+    0
+  end
+
+  def payable_amount
+    0
+  end
+
+  def tax_amount
+    0
+  end
+
+  def tax_sub_totals
+    [
+      {:taxable_amount=>0, :tax_inclusive_amount=>0, :tax_amount => 0, :already_claimed_taxable_amount => 0, :already_claimed_tax_amount => 0, :already_claimed_tax_inclusive_amount => 0, :difference_taxable_amount => 0, :difference_tax_amount => 0, :difference_tax_inclusive_amount => 0, :tax_percent => 19 }
+    ]
+  end
+
 end

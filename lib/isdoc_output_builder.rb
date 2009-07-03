@@ -31,49 +31,24 @@ class ISDOCOutputBuilder
         build_party customer, customer_details
       end
 
-      invoice.tag! :InvoiceLines do |invoice_lines|
-        invoice_lines.tag! :InvoiceLine do |invoice_line|
-          invoice_line.tag! :ID
-          invoice_line.tag! :LineExtensionAmount, 0
-          invoice_line.tag! :LineExtensionAmountTaxInclusive, 0
-          invoice_line.tag! :LineExtensionTaxAmount, 0
-          invoice_line.tag! :UnitPrice, 0
-          invoice_line.tag! :UnitPriceTaxInclusive, 0
-          invoice_line.tag! :ClassifiedTaxCategory do |classified_tax_category|
-            classified_tax_category.tag! :Percent, 0
-            classified_tax_category.tag! :VATCalculationMethod, 0
-          end
-          invoice_line.tag! :Item
-        end
+      invoice.tag! :InvoiceLines do |invoice_lines_tag|
+        build_invoice_lines invoice_lines_tag, invoice_lines
       end
 
       invoice.tag! :TaxTotal do |tax_total|
-        tax_total.tag! :TaxSubTotal do |tax_sub_total|
-          tax_sub_total.tag! :TaxableAmount, 0
-          tax_sub_total.tag! :TaxInclusiveAmount, 0
-          tax_sub_total.tag! :TaxAmount, 0
-          tax_sub_total.tag! :AlreadyClaimedTaxableAmount, 0
-          tax_sub_total.tag! :AlreadyClaimedTaxAmount, 0
-          tax_sub_total.tag! :AlreadyClaimedTaxInclusiveAmount, 0
-          tax_sub_total.tag! :DifferenceTaxableAmount, 0
-          tax_sub_total.tag! :DifferenceTaxAmount, 0
-          tax_sub_total.tag! :DifferenceTaxInclusiveAmount, 0
-          tax_sub_total.tag! :TaxCategory do |tax_category|
-            tax_category.tag! :Percent, 0
-          end
-        end
-        tax_total.tag! :TaxAmount, 0
+        build_tax_sub_totals(tax_total, tax_sub_totals)
+        tax_total.tag! :TaxAmount, tax_amount
       end
 
       invoice.tag! :LegalMonetaryTotal do |legal_monetary_total|
-        legal_monetary_total.tag! :TaxExclusiveAmount, 0
-        legal_monetary_total.tag! :TaxInclusiveAmount, 0
-        legal_monetary_total.tag! :AlreadyClaimedTaxExclusiveAmount, 0
-        legal_monetary_total.tag! :AlreadyClaimedTaxInclusiveAmount, 0
-        legal_monetary_total.tag! :DifferenceTaxExclusiveAmount, 0
-        legal_monetary_total.tag! :DifferenceTaxInclusiveAmount, 0
+        legal_monetary_total.tag! :TaxExclusiveAmount, tax_exclusive_amount
+        legal_monetary_total.tag! :TaxInclusiveAmount, tax_inclusive_amount
+        legal_monetary_total.tag! :AlreadyClaimedTaxExclusiveAmount, already_claimed_tax_exclusive_amount
+        legal_monetary_total.tag! :AlreadyClaimedTaxInclusiveAmount, already_claimed_tax_inclusive_amount
+        legal_monetary_total.tag! :DifferenceTaxExclusiveAmount, difference_tax_exclusive_amount
+        legal_monetary_total.tag! :DifferenceTaxInclusiveAmount, difference_tax_inclusive_amount
         legal_monetary_total.tag! :PaidDepositsAmount, paid_deposits_amount
-        legal_monetary_total.tag! :PayableAmount, 0
+        legal_monetary_total.tag! :PayableAmount, payable_amount
       end
     end
     isdoc.target!
@@ -104,6 +79,45 @@ class ISDOCOutputBuilder
         party_tax_scheme.tag! :CompanyID, details[:tax_number]
         party_tax_scheme.tag! :TaxScheme, "VAT"
       end if details[:tax_number]
+    end
+  end
+
+  def build_invoice_lines(invoice_lines, items)
+    items.each_with_index do |item, index|
+      invoice_lines.tag! :InvoiceLine do |invoice_line|
+        invoice_line.tag! :ID, index+1
+        invoice_line.tag! :LineExtensionAmount, item[:line_extension_amount]
+        invoice_line.tag! :LineExtensionAmountTaxInclusive, item[:line_extension_amount_tax_inclusive]
+        invoice_line.tag! :LineExtensionTaxAmount, item[:line_extension_tax_amount]
+        invoice_line.tag! :UnitPrice, item[:unit_price]
+        invoice_line.tag! :UnitPriceTaxInclusive, item[:unit_price_tax_inclusive]
+        invoice_line.tag! :ClassifiedTaxCategory do |classified_tax_category|
+          classified_tax_category.tag! :Percent, item[:tax_percent]
+          classified_tax_category.tag! :VATCalculationMethod, item[:vat_calculation_method]
+        end
+        invoice_line.tag! :Item do |item_tag|
+          item_tag.tag! :Description, item[:description] if item[:description]
+        end
+      end
+    end
+  end
+
+  def build_tax_sub_totals(tax_total, tax_sub_totals)
+    for tax_sub_total in tax_sub_totals
+      tax_total.tag! :TaxSubTotal do |tax_sub_total_tag|
+        tax_sub_total_tag.tag! :TaxableAmount, tax_sub_total[:taxable_amount]
+        tax_sub_total_tag.tag! :TaxInclusiveAmount, tax_sub_total[:tax_inclusive_amount]
+        tax_sub_total_tag.tag! :TaxAmount, tax_sub_total[:tax_amount]
+        tax_sub_total_tag.tag! :AlreadyClaimedTaxableAmount, tax_sub_total[:already_claimed_taxable_amount]
+        tax_sub_total_tag.tag! :AlreadyClaimedTaxAmount, tax_sub_total[:already_claimed_tax_amount]
+        tax_sub_total_tag.tag! :AlreadyClaimedTaxInclusiveAmount, tax_sub_total[:already_claimed_tax_inclusive_amount]
+        tax_sub_total_tag.tag! :DifferenceTaxableAmount, tax_sub_total[:difference_taxable_amount]
+        tax_sub_total_tag.tag! :DifferenceTaxAmount, tax_sub_total[:difference_tax_amount]
+        tax_sub_total_tag.tag! :DifferenceTaxInclusiveAmount, tax_sub_total[:difference_tax_inclusive_amount]
+        tax_sub_total_tag.tag! :TaxCategory do |tax_category|
+          tax_category.tag! :Percent, tax_sub_total[:tax_percent]
+        end
+      end
     end
   end
 
