@@ -32,6 +32,11 @@
                 <CompanyID>CZ12345678</CompanyID>
                 <TaxScheme>VAT</TaxScheme>
             </PartyTaxScheme>
+            <RegisterIdentification>
+                <RegisterKeptAt>Mestsky soud v Praze</RegisterKeptAt>
+                <RegisterFileRef>C123456</RegisterFileRef>
+                <RegisterDate>2001-01-01</RegisterDate>
+            </RegisterIdentification>
         </Party>
     </AccountingSupplierParty>
     <AccountingCustomerParty>

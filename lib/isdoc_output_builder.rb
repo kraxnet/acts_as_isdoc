@@ -79,6 +79,11 @@ class ISDOCOutputBuilder
         party_tax_scheme.tag! :CompanyID, details[:tax_number]
         party_tax_scheme.tag! :TaxScheme, "VAT"
       end if details[:tax_number]
+      party.tag! :RegisterIdentification do |register_identification|
+        register_identification.tag! :RegisterKeptAt, details[:register_kept_at]
+        register_identification.tag! :RegisterFileRef, details[:register_file_ref]
+        register_identification.tag! :RegisterDate, details[:register_date]
+      end if details[:register_kept_at]
     end
   end
 
