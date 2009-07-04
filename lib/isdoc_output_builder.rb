@@ -128,6 +128,7 @@ class ISDOCOutputBuilder
         invoice_line.tag! :Item do |item_tag|
           item_tag.tag! :Description, item[:description] if item[:description]
         end
+        draw_invoice_line_extensions(invoice_line, item) if ledger_item.respond_to?(:draw_invoice_line_extensions)
       end
     end
   end
@@ -168,7 +169,7 @@ class ISDOCOutputBuilder
       # allows setting default values directly instead of calling a method
       return method_id unless ledger_item.respond_to?(method_id)
     end
-    ledger_item.send(method_id) if ledger_item.respond_to?(method_id)
+    return ledger_item.send(method_id, *args) if ledger_item.respond_to?(method_id)
   end
 
 end
