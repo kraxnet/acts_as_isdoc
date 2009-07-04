@@ -123,6 +123,9 @@
             </ClassifiedTaxCategory>
             <Item>
                 <Description>First item</Description>
+                <SellersItemIdentification>
+                    <ID>ABC-123</ID>
+                </SellersItemIdentification>
             </Item>
         </InvoiceLine>
     </InvoiceLines>

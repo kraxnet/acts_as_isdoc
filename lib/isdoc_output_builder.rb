@@ -127,6 +127,9 @@ class ISDOCOutputBuilder
         end
         invoice_line.tag! :Item do |item_tag|
           item_tag.tag! :Description, item[:description] if item[:description]
+          item_tag.tag! :SellersItemIdentification do |sellers_item_identification_tag|
+            sellers_item_identification_tag.tag! :ID, item[:sellers_item_identification]
+          end if item[:sellers_item_identification]
         end
         draw_invoice_line_extensions(invoice_line, item) if ledger_item.respond_to?(:draw_invoice_line_extensions)
       end

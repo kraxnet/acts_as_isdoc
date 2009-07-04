@@ -37,7 +37,7 @@ class SampleInvoice < ActiveRecord::Base
 
   def invoice_lines
     [
-      {:line_extension_amount=>0, :line_extension_amount_tax_inclusive=>0, :line_extension_tax_amount=>0, :unit_price=>0, :unit_price_tax_inclusive=>0, :tax_percent=>19, :vat_calculation_method=>0, :description=>"First item"}
+      {:line_extension_amount=>0, :line_extension_amount_tax_inclusive=>0, :line_extension_tax_amount=>0, :unit_price=>0, :unit_price_tax_inclusive=>0, :tax_percent=>19, :vat_calculation_method=>0, :description=>"First item", :sellers_item_identification => "ABC-123", }
     ]
   end
 
