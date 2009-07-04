@@ -39,6 +39,32 @@
             </RegisterIdentification>
         </Party>
     </AccountingSupplierParty>
+    <SellerSupplierParty>
+        <Party>
+            <PartyIdentification>
+                <UserID/>
+                <CatalogFirmIdentification/>
+                <ID/>
+            </PartyIdentification>
+            <PartyName>
+                <Name>Pepicek</Name>
+            </PartyName>
+            <PostalAddress>
+                <StreetName>Ulicni</StreetName>
+                <BuildingNumber>230/9</BuildingNumber>
+                <CityName>Praha</CityName>
+                <PostalZone>17000</PostalZone>
+                <Country>
+                    <IdentificationCode>cz</IdentificationCode>
+                    <Name>Czech Republic</Name>
+                </Country>
+            </PostalAddress>
+            <PartyTaxScheme>
+                <CompanyID>CZ12345678</CompanyID>
+                <TaxScheme>VAT</TaxScheme>
+            </PartyTaxScheme>
+        </Party>
+    </SellerSupplierParty>
     <AccountingCustomerParty>
         <Party>
             <PartyIdentification>

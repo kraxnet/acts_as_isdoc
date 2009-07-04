@@ -24,8 +24,12 @@ class ISDOCOutputBuilder
       invoice.tag! :RefCurrRate, 1
 
       invoice.tag! :AccountingSupplierParty do |supplier|
-        build_party supplier, sender_details
+        build_party supplier, seller_details
       end
+
+      invoice.tag! :SellerSupplierParty do |sender|
+        build_party sender, sender_details
+      end if sender_details
 
       invoice.tag! :AccountingCustomerParty do |customer|
         build_party customer, customer_details
