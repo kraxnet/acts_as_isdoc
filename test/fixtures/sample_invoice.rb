@@ -92,4 +92,10 @@ class SampleInvoice < ActiveRecord::Base
     ]
   end
 
+  def taxed_deposits
+    [
+      {:id=>"1234", :variable_symbol=>"1234", :taxable_deposit_amount=>100, :tax_inclusive_deposit_amount=>119, :tax_percent=>19, :vat_calculation_method=>0 }
+    ]
+  end
+
 end

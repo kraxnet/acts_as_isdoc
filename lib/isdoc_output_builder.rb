@@ -49,6 +49,10 @@ class ISDOCOutputBuilder
         build_non_taxed_deposits non_taxed_deposits_tag, non_taxed_deposits
       end if non_taxed_deposits
 
+      invoice.tag! :TaxedDeposits do |taxed_deposits_tag|
+        build_taxed_deposits taxed_deposits_tag, taxed_deposits
+      end if taxed_deposits
+
       invoice.tag! :TaxTotal do |tax_total|
         build_tax_sub_totals(tax_total, tax_sub_totals)
         tax_total.tag! :TaxAmount, tax_amount
@@ -177,6 +181,21 @@ class ISDOCOutputBuilder
         non_taxed_deposit.tag! :ID, detail[:id]
         non_taxed_deposit.tag! :VariableSymbol, detail[:variable_symbol]
         non_taxed_deposit.tag! :DepositAmount, detail[:deposit_amount]
+      end
+    end
+  end
+
+  def build_taxed_deposits(xml, details)
+    for detail in details
+      xml.tag! :TaxedDeposit do |taxed_deposit|
+        taxed_deposit.tag! :ID, detail[:id]
+        taxed_deposit.tag! :VariableSymbol, detail[:variable_symbol]
+        taxed_deposit.tag! :TaxableDepositAmount, detail[:taxable_deposit_amount]
+        taxed_deposit.tag! :TaxInclusiveDepositAmount, detail[:tax_inclusive_deposit_amount]
+        taxed_deposit.tag! :ClassifiedTaxCategory do |classified_tax_category|
+          classified_tax_category.tag! :Percent, detail[:tax_percent]
+          classified_tax_category.tag! :VATCalculationMethod, detail[:vat_calculation_method]
+        end
       end
     end
   end

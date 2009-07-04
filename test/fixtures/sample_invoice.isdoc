@@ -137,6 +137,18 @@
             <DepositAmount>300</DepositAmount>
         </NonTaxedDeposit>
     </NonTaxedDeposits>
+    <TaxedDeposits>
+        <TaxedDeposit>
+            <ID>1234</ID>
+            <VariableSymbol>1234</VariableSymbol>
+            <TaxableDepositAmount>100</TaxableDepositAmount>
+            <TaxInclusiveDepositAmount>119</TaxInclusiveDepositAmount>
+            <ClassifiedTaxCategory>
+                <Percent>19</Percent>
+                <VATCalculationMethod>0</VATCalculationMethod>
+            </ClassifiedTaxCategory>
+        </TaxedDeposit>
+    </TaxedDeposits>
     <TaxTotal>
         <TaxSubTotal>
             <TaxableAmount>0</TaxableAmount>
