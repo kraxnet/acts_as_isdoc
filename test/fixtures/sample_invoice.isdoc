@@ -13,7 +13,7 @@
             <PartyIdentification>
                 <UserID/>
                 <CatalogFirmIdentification/>
-                <ID/>
+                <ID>12345678</ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Pepicek</Name>
@@ -44,7 +44,7 @@
             <PartyIdentification>
                 <UserID/>
                 <CatalogFirmIdentification/>
-                <ID/>
+                <ID></ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Pepicek</Name>
@@ -70,7 +70,7 @@
             <PartyIdentification>
                 <UserID/>
                 <CatalogFirmIdentification/>
-                <ID/>
+                <ID></ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Frantisek</Name>
@@ -92,7 +92,7 @@
             <PartyIdentification>
                 <UserID/>
                 <CatalogFirmIdentification/>
-                <ID/>
+                <ID></ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Frantisek</Name>

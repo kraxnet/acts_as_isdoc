@@ -68,7 +68,7 @@ class ISDOCOutputBuilder
       party.tag! :PartyIdentification do |party_identification|
         party_identification.tag! :UserID
         party_identification.tag! :CatalogFirmIdentification
-        party_identification.tag! :ID
+        party_identification.tag! :ID, details[:company_id]
       end
       party.tag! :PartyName do |party_name|
         party_name.tag! :Name, details[:name]
