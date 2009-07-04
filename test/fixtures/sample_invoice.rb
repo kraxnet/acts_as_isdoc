@@ -5,7 +5,8 @@ class SampleInvoice < ActiveRecord::Base
     :issue_date => :issued_on,
     :document_id => :id,
     :document_uuid => "UUID",
-    :tax_point_date => "1970-01-01"
+    :tax_point_date => "1970-01-01",
+    :note => "Poznamka"
 
   def id
     123

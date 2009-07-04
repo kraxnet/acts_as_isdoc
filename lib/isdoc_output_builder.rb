@@ -19,6 +19,8 @@ class ISDOCOutputBuilder
       invoice.tag! :IssueDate, issue_date
       invoice.tag! :TaxPointDate, tax_point_date if tax_point_date
 
+      invoice.tag! :Note, note if note
+
       invoice.tag! :LocalCurrencyCode, local_currency_code
       invoice.tag! :CurrRate, 1
       invoice.tag! :RefCurrRate, 1

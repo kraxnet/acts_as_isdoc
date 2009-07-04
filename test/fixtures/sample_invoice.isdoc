@@ -5,6 +5,7 @@
     <UUID>UUID</UUID>
     <IssueDate>2000-01-01</IssueDate>
     <TaxPointDate>1970-01-01</TaxPointDate>
+    <Note>Poznamka</Note>
     <LocalCurrencyCode>CZK</LocalCurrencyCode>
     <CurrRate>1</CurrRate>
     <RefCurrRate>1</RefCurrRate>
