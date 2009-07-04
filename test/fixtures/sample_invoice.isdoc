@@ -153,4 +153,27 @@
         <PaidDepositsAmount>300</PaidDepositsAmount>
         <PayableAmount>0</PayableAmount>
     </LegalMonetaryTotal>
+    <PaymentMeans>
+        <Payment>
+            <PaidAmount>100</PaidAmount>
+            <PaymentMeansCode>42</PaymentMeansCode>
+            <Details>
+                <PaymentDueDate>2006-01-01</PaymentDueDate>
+                <ID></ID>
+                <BankCode>5500</BankCode>
+                <Name></Name>
+                <IBAN></IBAN>
+                <BIC></BIC>
+            </Details>
+        </Payment>
+        <AlternateBankAccounts>
+            <AlternateBankAccount>
+                <ID></ID>
+                <BankCode>192</BankCode>
+                <Name></Name>
+                <IBAN></IBAN>
+                <BIC></BIC>
+            </AlternateBankAccount>
+        </AlternateBankAccounts>
+    </PaymentMeans>
 </Invoice>

@@ -79,4 +79,10 @@ class SampleInvoice < ActiveRecord::Base
     ]
   end
 
+  def payment_means_detail
+    {:paid_amount=>100, :payments_mean_code=>42, :bank_code=>5500, :payment_due_date=>"2006-01-01",
+      :alternate_bank_accounts=>[{:bank_code=>0300}]
+    }
+  end
+
 end

@@ -58,6 +58,23 @@ class ISDOCOutputBuilder
         legal_monetary_total.tag! :PaidDepositsAmount, paid_deposits_amount
         legal_monetary_total.tag! :PayableAmount, payable_amount
       end
+
+      invoice.tag! :PaymentMeans do |payment_means|
+        payment_means.tag! :Payment do |payment|
+          payment.tag! :PaidAmount, payment_means_detail[:paid_amount]
+          payment.tag! :PaymentMeansCode, payment_means_detail[:payments_mean_code]
+          payment.tag! :Details do |details|
+            build_bank_account(details, payment_means_detail)
+          end #if payment_means_detail[:payments_mean_code.to_i==42]
+        end
+        payment_means.tag! :AlternateBankAccounts do |alternate_bank_accounts|
+          for alternate_bank_account in payment_means_detail[:alternate_bank_accounts]
+            alternate_bank_accounts.tag! :AlternateBankAccount do
+              build_bank_account(alternate_bank_accounts, alternate_bank_account)
+            end
+          end
+        end if payment_means_detail[:alternate_bank_accounts]
+      end if payment_means_detail
     end
     isdoc.target!
   end
@@ -132,6 +149,16 @@ class ISDOCOutputBuilder
         end
       end
     end
+  end
+
+  def build_bank_account(xml, details)
+    xml.tag! :PaymentDueDate, details[:payment_due_date] if details[:payment_due_date]
+    xml.tag! :ID, details[:id]
+    xml.tag! :BankCode, details[:bank_code]
+    xml.tag! :Name, details[:name]
+    xml.tag! :IBAN, details[:iban]
+    xml.tag! :BIC, details[:bic]
+    # xml.tag! :VariableSymbol, payment_means[:variable_symbol]
   end
 
   def method_missing(method_id, *args, &block)
