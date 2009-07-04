@@ -130,6 +130,13 @@
             </Item>
         </InvoiceLine>
     </InvoiceLines>
+    <NonTaxedDeposits>
+        <NonTaxedDeposit>
+            <ID>1234</ID>
+            <VariableSymbol>1234</VariableSymbol>
+            <DepositAmount>300</DepositAmount>
+        </NonTaxedDeposit>
+    </NonTaxedDeposits>
     <TaxTotal>
         <TaxSubTotal>
             <TaxableAmount>0</TaxableAmount>

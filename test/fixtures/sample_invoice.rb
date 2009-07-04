@@ -86,4 +86,10 @@ class SampleInvoice < ActiveRecord::Base
     }
   end
 
+  def non_taxed_deposits
+    [
+      {:id=>"1234", :variable_symbol=>"1234", :deposit_amount=>300}
+    ]
+  end
+
 end

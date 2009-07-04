@@ -45,6 +45,10 @@ class ISDOCOutputBuilder
         build_invoice_lines invoice_lines_tag, invoice_lines
       end
 
+      invoice.tag! :NonTaxedDeposits do |non_taxed_deposits_tag|
+        build_non_taxed_deposits non_taxed_deposits_tag, non_taxed_deposits
+      end if non_taxed_deposits
+
       invoice.tag! :TaxTotal do |tax_total|
         build_tax_sub_totals(tax_total, tax_sub_totals)
         tax_total.tag! :TaxAmount, tax_amount
@@ -165,6 +169,16 @@ class ISDOCOutputBuilder
     xml.tag! :IBAN, details[:iban]
     xml.tag! :BIC, details[:bic]
     # xml.tag! :VariableSymbol, payment_means[:variable_symbol]
+  end
+
+  def build_non_taxed_deposits(xml, details)
+    for detail in details
+      xml.tag! :NonTaxedDeposit do |non_taxed_deposit|
+        non_taxed_deposit.tag! :ID, detail[:id]
+        non_taxed_deposit.tag! :VariableSymbol, detail[:variable_symbol]
+        non_taxed_deposit.tag! :DepositAmount, detail[:deposit_amount]
+      end
+    end
   end
 
   def method_missing(method_id, *args, &block)
