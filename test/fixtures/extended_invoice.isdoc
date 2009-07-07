@@ -10,7 +10,7 @@
     <AccountingSupplierParty>
         <Party>
             <PartyIdentification>
-                <UserID/>
+                <UserID></UserID>
                 <CatalogFirmIdentification/>
                 <ID></ID>
             </PartyIdentification>
@@ -36,7 +36,7 @@
     <AccountingCustomerParty>
         <Party>
             <PartyIdentification>
-                <UserID/>
+                <UserID></UserID>
                 <CatalogFirmIdentification/>
                 <ID></ID>
             </PartyIdentification>

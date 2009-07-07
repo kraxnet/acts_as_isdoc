@@ -93,7 +93,7 @@ class ISDOCOutputBuilder
     details = details.symbolize_keys
     xml.tag! :Party do |party|
       party.tag! :PartyIdentification do |party_identification|
-        party_identification.tag! :UserID
+        party_identification.tag! :UserID, details[:user_id]
         party_identification.tag! :CatalogFirmIdentification
         party_identification.tag! :ID, details[:company_id]
       end

@@ -29,7 +29,7 @@ class SampleInvoice < ActiveRecord::Base
   end
 
   def customer_details
-    { :name => "Frantisek" }
+    { :name => "Frantisek", :user_id=>"54321" }
   end
 
   def recipient_details
