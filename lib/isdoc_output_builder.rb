@@ -11,7 +11,7 @@ class ISDOCOutputBuilder
     isdoc = Builder::XmlMarkup.new :indent => 4
     isdoc.instruct! :xml
 
-    isdoc.tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/invoice", :version=>"5.1") do |invoice|
+    isdoc.tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/invoice", :version=>"5.2") do |invoice|
       invoice.tag! :DocumentType, document_type
       invoice.tag! :ID, document_id
       invoice.tag! :UUID, document_uuid
@@ -93,8 +93,8 @@ class ISDOCOutputBuilder
     details = details.symbolize_keys
     xml.tag! :Party do |party|
       party.tag! :PartyIdentification do |party_identification|
-        party_identification.tag! :UserID, details[:user_id]
-        party_identification.tag! :CatalogFirmIdentification
+        party_identification.tag! :UserID, details[:user_id] if details[:user_id]
+        # party_identification.tag! :CatalogFirmIdentification
         party_identification.tag! :ID, details[:company_id]
       end
       party.tag! :PartyName do |party_name|

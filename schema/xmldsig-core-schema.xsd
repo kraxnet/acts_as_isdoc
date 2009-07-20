@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--Schema for XML Signatures http://www.w3.org/2000/09/xmldsig#
+<?xml version="1.0" encoding="UTF-8"?><!-- Schema for XML Signatures
+    http://www.w3.org/2000/09/xmldsig#
     $Revision: 1.3 $ on $Date: 2009/03/10 21:06:41 $ by $Author: jkj $
 
     Copyright 2001 The Internet Society and W3C (Massachusetts Institute
@@ -9,12 +9,10 @@
 
     This document is governed by the W3C Software License [1] as described
     in the FAQ [2].
-    [1] http://www.w3.org/Consortium/Legal/copyright-software-19980720
-    [2] http://www.w3.org/Consortium/Legal/IPR-FAQ-20000620.html#DTD-->
 
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" 
-        targetNamespace="http://www.w3.org/2000/09/xmldsig#" version="0.1" elementFormDefault="qualified" 
-        finalDefault="" blockDefault="" attributeFormDefault="unqualified"> 
+    [1] http://www.w3.org/Consortium/Legal/copyright-software-19980720
+    [2] http://www.w3.org/Consortium/Legal/IPR-FAQ-20000620.html#DTD
+--><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.w3.org/2000/09/xmldsig#" version="0.1" elementFormDefault="qualified" finalDefault="" blockDefault="" attributeFormDefault="unqualified"> 
 
 <!-- Basic Types Defined for Signatures -->
 
