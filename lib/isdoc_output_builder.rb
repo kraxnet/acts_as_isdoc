@@ -74,7 +74,7 @@ class ISDOCOutputBuilder
           payment.tag! :PaidAmount, payment_means_detail[:paid_amount]
           payment.tag! :PaymentMeansCode, payment_means_detail[:payments_mean_code]
           payment.tag! :Details do |details|
-            build_bank_account(details, payment_means_detail)
+            build_bank_account(details, payment_means_detail, true)
           end #if payment_means_detail[:payments_mean_code.to_i==42]
         end
         payment_means.tag! :AlternateBankAccounts do |alternate_bank_accounts|
@@ -165,14 +165,14 @@ class ISDOCOutputBuilder
     end
   end
 
-  def build_bank_account(xml, details)
+  def build_bank_account(xml, details, main_bank_account=false)
     xml.tag! :PaymentDueDate, details[:payment_due_date] if details[:payment_due_date]
     xml.tag! :ID, details[:id]
     xml.tag! :BankCode, details[:bank_code]
     xml.tag! :Name, details[:name]
     xml.tag! :IBAN, details[:iban]
     xml.tag! :BIC, details[:bic]
-    # xml.tag! :VariableSymbol, payment_means[:variable_symbol]
+    xml.tag! :VariableSymbol, payment_means_detail[:variable_symbol] if main_bank_account
   end
 
   def build_non_taxed_deposits(xml, details)

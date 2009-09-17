@@ -180,6 +180,7 @@
                 <Name></Name>
                 <IBAN></IBAN>
                 <BIC></BIC>
+                <VariableSymbol>12345678</VariableSymbol>
             </Details>
         </Payment>
         <AlternateBankAccounts>
