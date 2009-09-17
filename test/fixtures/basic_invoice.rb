@@ -11,7 +11,8 @@ class BasicInvoice < ActiveRecord::Base
     :difference_tax_exclusive_amount => "0",
     :difference_tax_inclusive_amount => "0",
     :payable_amount => "0",
-    :document_id => "1234"
+    :document_id => "1234",
+    :document_uuid => "2D6D6400-D922-4DF5-8A76-EB68350B02AF"
 
   def id
     1

@@ -2,7 +2,7 @@
 <Invoice xmlns="http://isdoc.cz/namespace/invoice" version="5.2">
     <DocumentType>1</DocumentType>
     <ID>1234</ID>
-    <UUID></UUID>
+    <UUID>2D6D6400-D922-4DF5-8A76-EB68350B02AF</UUID>
     <IssueDate>2009-07-01</IssueDate>
     <LocalCurrencyCode>CZK</LocalCurrencyCode>
     <CurrRate>1</CurrRate>
