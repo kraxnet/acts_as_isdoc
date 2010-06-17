@@ -1,3 +1,5 @@
+require 'builder'
+
 class ISDOCOutputBuilder
 
   attr_reader :ledger_item, :options
