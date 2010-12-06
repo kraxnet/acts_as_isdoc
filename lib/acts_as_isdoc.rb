@@ -19,4 +19,20 @@ module ActsAsIsdoc
   end
 end
 
+require 'builder'
+module Builder
+  class XmlBase
+    def encoded_tag!(sym, *args, &block)
+      args = args.map do |a|
+        if a.kind_of? Hash
+          a.each_pair {|key, value| a[key] = HTMLEntities.new.encode(value)}
+        else
+          HTMLEntities.new.encode(a)
+        end
+      end
+      tag!(sym, *args, &block)
+    end
+  end
+end
+
 ActiveRecord::Base.send :include, ActsAsIsdoc
