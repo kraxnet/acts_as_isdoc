@@ -21,6 +21,14 @@ class ISDOCOutputBuilder
 
       invoice.encoded_tag! :Note, note if note
 
+      invoice.encoded_tag! :OrderReferences do |order_references|
+        order_references.encoded_tag! :OrderReference do |order_reference|
+          order_reference.encoded_tag! :SalesOrderID
+          order_reference.encoded_tag! :ExternalOrderID, external_order_id
+          order_reference.encoded_tag! :IssueDate, issue_date
+        end
+      end if external_order_id
+
       invoice.encoded_tag! :LocalCurrencyCode, local_currency_code
       invoice.encoded_tag! :CurrRate, 1
       invoice.encoded_tag! :RefCurrRate, 1
