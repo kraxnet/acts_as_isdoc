@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require File.dirname(__FILE__) + '/test_helper.rb'
 require File.dirname(__FILE__) + '/fixtures/sample_invoice.rb'
 require File.dirname(__FILE__) + '/fixtures/basic_invoice.rb'

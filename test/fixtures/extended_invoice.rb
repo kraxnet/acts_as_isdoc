@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ExtendedInvoice < BasicInvoice
   def draw_invoice_line_extensions(invoice_line, item)
     invoice_line.tag! :Extensions do |extensions|

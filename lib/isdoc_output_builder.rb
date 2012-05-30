@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ISDOCOutputBuilder
 
   attr_reader :ledger_item, :options
