@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+require File.join(File.dirname(__FILE__), 'acts_as_isdoc/version')
+require File.join(File.dirname(__FILE__), 'isdoc_output_builder')
+
 module ActsAsIsdoc
   def self.included(base)
     base.send :extend, ClassMethods
