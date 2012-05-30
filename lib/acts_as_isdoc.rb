@@ -25,10 +25,10 @@ module Builder
   class XmlBase
     def encoded_tag!(sym, *args, &block)
       args = args.map do |a|
-        if a.kind_of? Hash
-          a.each_pair {|key, value| a[key] = HTMLEntities.new.encode(value)}
+        if a.kind_of? ::Hash
+          a.each_pair {|key, value| a[key] = ::HTMLEntities.new.encode(value)}
         else
-          HTMLEntities.new.encode(a)
+          ::HTMLEntities.new.encode(a)
         end
       end
       tag!(sym, *args, &block)
