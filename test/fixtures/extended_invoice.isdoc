@@ -73,12 +73,11 @@
             <Item>
             </Item>
             <Extensions>
-                <domain xmlns="http://www.xnet.cz/xml/isdoc/domain-1.0">
-                    <fqdn>fqdn.cz</fqdn>
-                    <since>2009-01-01</since>
-                    <till>2010-01-01</till>
-                    <period>1Y</period>
-                </domain>
+                <Domains xmlns="http://www.xnet.cz/xml/isdoc/domain-1.0">
+                    <Name>fqdn.cz</Name>
+                    <Since>2009-01-01</Since>
+                    <Till>2010-01-01</Till>
+                </Domains>
             </Extensions>
         </InvoiceLine>
     </InvoiceLines>
