@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'active_record'
 class BasicInvoice < ActiveRecord::Base
   acts_as_isdoc :document_type=>"1",
     :paid_deposits_amount => "300",
@@ -30,7 +31,7 @@ class BasicInvoice < ActiveRecord::Base
   def customer_details
     { :name => "Frantisek" }
   end
-  
+
   def invoice_lines
     [ {:line_extension_amount=>0, :line_extension_amount_tax_inclusive=>0, :line_extension_tax_amount=>0, :unit_price=>0, :unit_price_tax_inclusive=>0, :tax_percent=>0, :vat_calculation_method=>0} ]
   end

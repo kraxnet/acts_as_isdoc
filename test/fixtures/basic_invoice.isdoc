@@ -17,7 +17,7 @@
     <AccountingSupplierParty>
         <Party>
             <PartyIdentification>
-                <ID></ID>
+                <ID/>
             </PartyIdentification>
             <PartyName>
                 <Name>Pepicek</Name>
@@ -41,19 +41,19 @@
     <AccountingCustomerParty>
         <Party>
             <PartyIdentification>
-                <ID></ID>
+                <ID/>
             </PartyIdentification>
             <PartyName>
                 <Name>Frantisek</Name>
             </PartyName>
             <PostalAddress>
-                <StreetName></StreetName>
-                <BuildingNumber></BuildingNumber>
-                <CityName></CityName>
-                <PostalZone></PostalZone>
+                <StreetName/>
+                <BuildingNumber/>
+                <CityName/>
+                <PostalZone/>
                 <Country>
-                    <IdentificationCode></IdentificationCode>
-                    <Name></Name>
+                    <IdentificationCode/>
+                    <Name/>
                 </Country>
             </PostalAddress>
         </Party>

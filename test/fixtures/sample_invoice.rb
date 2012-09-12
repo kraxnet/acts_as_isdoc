@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'active_record'
+require 'acts_as_isdoc'
 class SampleInvoice < ActiveRecord::Base
   acts_as_isdoc :document_type=>"1",
     :paid_deposits_amount => :paid_deposits,

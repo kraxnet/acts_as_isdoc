@@ -4,13 +4,20 @@
     <ID>1234</ID>
     <UUID>2D6D6400-D922-4DF5-8A76-EB68350B02AF</UUID>
     <IssueDate>2009-07-01</IssueDate>
+    <OrderReferences>
+        <OrderReference>
+            <SalesOrderID/>
+            <ExternalOrderID>ABC1234</ExternalOrderID>
+            <IssueDate>2009-07-01</IssueDate>
+        </OrderReference>
+    </OrderReferences>
     <LocalCurrencyCode>CZK</LocalCurrencyCode>
     <CurrRate>1</CurrRate>
     <RefCurrRate>1</RefCurrRate>
     <AccountingSupplierParty>
         <Party>
             <PartyIdentification>
-                <ID></ID>
+                <ID/>
             </PartyIdentification>
             <PartyName>
                 <Name>Pepicek</Name>
@@ -34,19 +41,19 @@
     <AccountingCustomerParty>
         <Party>
             <PartyIdentification>
-                <ID></ID>
+                <ID/>
             </PartyIdentification>
             <PartyName>
                 <Name>Frantisek</Name>
             </PartyName>
             <PostalAddress>
-                <StreetName></StreetName>
-                <BuildingNumber></BuildingNumber>
-                <CityName></CityName>
-                <PostalZone></PostalZone>
+                <StreetName/>
+                <BuildingNumber/>
+                <CityName/>
+                <PostalZone/>
                 <Country>
-                    <IdentificationCode></IdentificationCode>
-                    <Name></Name>
+                    <IdentificationCode/>
+                    <Name/>
                 </Country>
             </PostalAddress>
         </Party>

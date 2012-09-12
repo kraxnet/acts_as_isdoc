@@ -2,6 +2,9 @@
 require File.join(File.dirname(__FILE__), 'acts_as_isdoc/version')
 require File.join(File.dirname(__FILE__), 'isdoc_output_builder')
 
+require 'htmlentities'
+require 'tempfile'
+
 module ActsAsIsdoc
   def self.included(base)
     base.send :extend, ClassMethods
