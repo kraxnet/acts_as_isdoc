@@ -34,6 +34,8 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :CurrRate, 1
       invoice.encoded_tag! :RefCurrRate, 1
 
+      draw_dispatches(invoice, dispatches)
+
       invoice.encoded_tag! :AccountingSupplierParty do |supplier|
         build_party supplier, seller_details
       end

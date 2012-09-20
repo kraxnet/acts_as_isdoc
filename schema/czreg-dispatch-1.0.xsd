@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://czreg.cz/isdoc/namespace/dispatch-1.0"
+  xmlns:domain="http://czreg.cz/isdoc/namespace/dispatch-1.0"
+  xmlns:invoice="http://isdoc.cz/namespace/invoice"
+  elementFormDefault="qualified"
+  version="1.0">
+
+  <xs:annotation>
+    <xs:documentation>
+      Extension for distributing invoice to parties. It includes type of dispatch
+      and optionall email address for EmailDelivery type.
+    </xs:documentation>
+  </xs:annotation>
+
+  <!--
+  Object identifier type.
+  -->
+  <xs:element name="Dispatches">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">Kolekce způsobů doručení</xs:documentation>
+      <xs:documentation xml:lang="en">Collection of dispatch methods</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Dispatch" type="DispatchType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="DispatchType">
+    <xs:sequence>
+      <!-- normal, recorder delivery, proof of delivery -->
+      <xs:element name="Postage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Email" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+

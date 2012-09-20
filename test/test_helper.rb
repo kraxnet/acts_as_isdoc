@@ -40,7 +40,7 @@ end
 
 # validation code taken from http://htmltest.googlecode.com/svn/trunk/html_test/lib/validator.rb
 def valid_isdoc?(body)
-  schema = File.join(File.dirname(__FILE__), "..", "schema", "isdoc-invoice-5.2.xsd")
+  schema = File.join(File.dirname(__FILE__), "..", "schema", "czreg-all-1.0.xsd")
   error_file = create_tmp_file("xmllint_error")
   doc_file = command = nil
   doc_file = create_tmp_file("xmllint", body)
