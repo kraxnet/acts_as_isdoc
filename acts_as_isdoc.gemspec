@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "builder"
   gem.add_dependency "htmlentities"
-  gem.add_dependency "active_support"
+  gem.add_dependency "activesupport"
   gem.add_dependency "activerecord"
   gem.add_dependency "htmlentities"
 end
