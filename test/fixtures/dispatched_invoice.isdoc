@@ -16,14 +16,19 @@
     <RefCurrRate>1</RefCurrRate>
     <Extensions>
         <Dispatches xmlns="http://czreg.cz/isdoc/namespace/dispatch-1.0">
-            <Email>joska@koska.cz</Email>
-            <Postage>common</Postage>
+            <Dispatch>
+                <Email>joska@koska.cz</Email>
+                <Email>koska@koska.cz</Email>
+            </Dispatch>
+            <Dispatch>
+                <Postage>common</Postage>
+            </Dispatch>
         </Dispatches>
     </Extensions>
     <AccountingSupplierParty>
         <Party>
             <PartyIdentification>
-                <ID/>
+                <ID></ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Pepicek</Name>
@@ -47,19 +52,19 @@
     <AccountingCustomerParty>
         <Party>
             <PartyIdentification>
-                <ID/>
+                <ID></ID>
             </PartyIdentification>
             <PartyName>
                 <Name>Frantisek</Name>
             </PartyName>
             <PostalAddress>
-                <StreetName/>
-                <BuildingNumber/>
-                <CityName/>
-                <PostalZone/>
+                <StreetName></StreetName>
+                <BuildingNumber></BuildingNumber>
+                <CityName></CityName>
+                <PostalZone></PostalZone>
                 <Country>
-                    <IdentificationCode/>
-                    <Name/>
+                    <IdentificationCode></IdentificationCode>
+                    <Name></Name>
                 </Country>
             </PostalAddress>
         </Party>

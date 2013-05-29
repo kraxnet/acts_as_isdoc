@@ -34,7 +34,7 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :CurrRate, 1
       invoice.encoded_tag! :RefCurrRate, 1
 
-      draw_dispatches(invoice, dispatches)
+      build_dispatches(invoice)
 
       invoice.encoded_tag! :AccountingSupplierParty do |supplier|
         build_party supplier, seller_details
@@ -206,6 +206,26 @@ class ISDOCOutputBuilder
         taxed_deposit.encoded_tag! :ClassifiedTaxCategory do |classified_tax_category|
           classified_tax_category.encoded_tag! :Percent, detail[:tax_percent]
           classified_tax_category.encoded_tag! :VATCalculationMethod, detail[:vat_calculation_method]
+        end
+      end
+    end
+  end
+
+  def build_dispatches(xml)
+    if ledger_item.respond_to?(:dispatches) && dispatches
+      xml.tag! :Extensions do |extensions|
+        extensions.tag! :Dispatches, :xmlns => "http://czreg.cz/isdoc/namespace/dispatch-1.0" do |disps|
+          dispatches.each_key do |dispatch|
+            disps.encoded_tag! "Dispatch" do |disp|
+              if dispatch == "Email"
+                Array(dispatches[dispatch]).each do |email|
+                  disp.encoded_tag! "Email", email
+                end
+              else
+                disp.encoded_tag! dispatch.to_sym, dispatches[dispatch]
+              end
+            end
+          end
         end
       end
     end
