@@ -217,12 +217,12 @@ class ISDOCOutputBuilder
         extensions.tag! :Dispatches, :xmlns => "http://czreg.cz/isdoc/namespace/dispatch-1.0" do |disps|
           dispatches.each_key do |dispatch|
             disps.encoded_tag! "Dispatch" do |disp|
-              if dispatch == "Email"
+              if dispatch == :emails
                 Array(dispatches[dispatch]).each do |email|
                   disp.encoded_tag! "Email", email
                 end
               else
-                disp.encoded_tag! dispatch.to_sym, dispatches[dispatch]
+                disp.encoded_tag! dispatch.to_s.capitalize, dispatches[dispatch]
               end
             end
           end

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class DispatchedInvoice < BasicInvoice
   def dispatches
-    {"Email" => ["joska@koska.cz", "koska@koska.cz"],
-     "Postage" => "common"}
+    {:emails => ["joska@koska.cz", "koska@koska.cz"],
+     :postage => "common"}
   end
 end
