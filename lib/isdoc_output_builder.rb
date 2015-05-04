@@ -12,7 +12,7 @@ class ISDOCOutputBuilder
     isdoc = Builder::XmlMarkup.new :indent => 4
     isdoc.instruct! :xml
 
-    isdoc.encoded_tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/invoice", :version=>"5.2") do |invoice|
+    isdoc.encoded_tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/2013", :version=>"6.0") do |invoice|
       invoice.encoded_tag! :DocumentType, document_type
       invoice.encoded_tag! :ID, document_id
       invoice.encoded_tag! :UUID, document_uuid
@@ -20,18 +20,18 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :IssueDate, issue_date
       invoice.encoded_tag! :TaxPointDate, tax_point_date if tax_point_date
 
-      invoice.encoded_tag! :Note, note if note
+      invoice.encoded_tag! :VATApplicable, vat_applicable
+      invoice.encoded_tag! :ElectronicPossibilityAgreementReference, ''
 
-      invoice.encoded_tag! :OrderReferences do |order_references|
-        order_references.encoded_tag! :OrderReference do |order_reference|
-          order_reference.encoded_tag! :SalesOrderID
-          order_reference.encoded_tag! :ExternalOrderID, external_order_id
-          order_reference.encoded_tag! :IssueDate, issue_date
-        end
-      end if external_order_id
+      invoice.encoded_tag! :Note, note
 
       invoice.encoded_tag! :LocalCurrencyCode, local_currency_code
-      invoice.encoded_tag! :CurrRate, 1
+      if foreign_currency_code
+        invoice.encoded_tag! :ForeignCurrencyCode, foreign_currency_code
+        invoice.encoded_tag! :CurrRate, curr_rate 
+      else
+        invoice.encoded_tag! :CurrRate, 1
+      end
       invoice.encoded_tag! :RefCurrRate, 1
 
       build_dispatches(invoice)
@@ -51,6 +51,14 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :BuyerCustomerParty do |recipient|
         build_party recipient, recipient_details
       end if recipient_details
+
+      invoice.encoded_tag! :OrderReferences do |order_references|
+        order_references.encoded_tag! :OrderReference do |order_reference|
+          order_reference.encoded_tag! :SalesOrderID
+          order_reference.encoded_tag! :ExternalOrderID, external_order_id
+          order_reference.encoded_tag! :IssueDate, issue_date
+        end
+      end if external_order_id
 
       invoice.encoded_tag! :InvoiceLines do |invoice_lines_tag|
         build_invoice_lines invoice_lines_tag, invoice_lines
@@ -161,8 +169,8 @@ class ISDOCOutputBuilder
     for tax_sub_total in tax_sub_totals
       tax_total.encoded_tag! :TaxSubTotal do |tax_sub_total_tag|
         tax_sub_total_tag.encoded_tag! :TaxableAmount, tax_sub_total[:taxable_amount]
-        tax_sub_total_tag.encoded_tag! :TaxInclusiveAmount, tax_sub_total[:tax_inclusive_amount]
         tax_sub_total_tag.encoded_tag! :TaxAmount, tax_sub_total[:tax_amount]
+        tax_sub_total_tag.encoded_tag! :TaxInclusiveAmount, tax_sub_total[:tax_inclusive_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxableAmount, tax_sub_total[:already_claimed_taxable_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxAmount, tax_sub_total[:already_claimed_tax_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxInclusiveAmount, tax_sub_total[:already_claimed_tax_inclusive_amount]
