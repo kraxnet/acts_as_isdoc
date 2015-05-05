@@ -12,7 +12,7 @@ class ISDOCOutputBuilder
     isdoc = Builder::XmlMarkup.new :indent => 4
     isdoc.instruct! :xml
 
-    isdoc.encoded_tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/invoice", :version=>"5.2") do |invoice|
+    isdoc.encoded_tag!( :Invoice, :xmlns=>"http://isdoc.cz/namespace/2013", :version=>"6.0") do |invoice|
       invoice.encoded_tag! :DocumentType, document_type
       invoice.encoded_tag! :ID, document_id
       invoice.encoded_tag! :UUID, document_uuid
@@ -20,18 +20,18 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :IssueDate, issue_date
       invoice.encoded_tag! :TaxPointDate, tax_point_date if tax_point_date
 
-      invoice.encoded_tag! :Note, note if note
+      invoice.encoded_tag! :VATApplicable, vat_applicable
+      invoice.encoded_tag! :ElectronicPossibilityAgreementReference, ''
 
-      invoice.encoded_tag! :OrderReferences do |order_references|
-        order_references.encoded_tag! :OrderReference do |order_reference|
-          order_reference.encoded_tag! :SalesOrderID
-          order_reference.encoded_tag! :ExternalOrderID, external_order_id
-          order_reference.encoded_tag! :IssueDate, issue_date
-        end
-      end if external_order_id
+      invoice.encoded_tag! :Note, note
 
       invoice.encoded_tag! :LocalCurrencyCode, local_currency_code
-      invoice.encoded_tag! :CurrRate, 1
+      if foreign_currency_code
+        invoice.encoded_tag! :ForeignCurrencyCode, foreign_currency_code
+        invoice.encoded_tag! :CurrRate, curr_rate 
+      else
+        invoice.encoded_tag! :CurrRate, 1
+      end
       invoice.encoded_tag! :RefCurrRate, 1
 
       build_dispatches(invoice)
@@ -51,6 +51,14 @@ class ISDOCOutputBuilder
       invoice.encoded_tag! :BuyerCustomerParty do |recipient|
         build_party recipient, recipient_details
       end if recipient_details
+
+      invoice.encoded_tag! :OrderReferences do |order_references|
+        order_references.encoded_tag! :OrderReference do |order_reference|
+          order_reference.encoded_tag! :SalesOrderID
+          order_reference.encoded_tag! :ExternalOrderID, external_order_id
+          order_reference.encoded_tag! :IssueDate, issue_date
+        end
+      end if external_order_id
 
       invoice.encoded_tag! :InvoiceLines do |invoice_lines_tag|
         build_invoice_lines invoice_lines_tag, invoice_lines
@@ -89,7 +97,7 @@ class ISDOCOutputBuilder
           end #if payment_means_detail[:payments_mean_code.to_i==42]
         end
         payment_means.encoded_tag! :AlternateBankAccounts do |alternate_bank_accounts|
-          for alternate_bank_account in payment_means_detail[:alternate_bank_accounts]
+          payment_means_detail[:alternate_bank_accounts].each do |alternate_bank_account|
             alternate_bank_accounts.encoded_tag! :AlternateBankAccount do
               build_bank_account(alternate_bank_accounts, alternate_bank_account)
             end
@@ -158,11 +166,11 @@ class ISDOCOutputBuilder
   end
 
   def build_tax_sub_totals(tax_total, tax_sub_totals)
-    for tax_sub_total in tax_sub_totals
+    tax_sub_totals.each do |tax_sub_total|
       tax_total.encoded_tag! :TaxSubTotal do |tax_sub_total_tag|
         tax_sub_total_tag.encoded_tag! :TaxableAmount, tax_sub_total[:taxable_amount]
-        tax_sub_total_tag.encoded_tag! :TaxInclusiveAmount, tax_sub_total[:tax_inclusive_amount]
         tax_sub_total_tag.encoded_tag! :TaxAmount, tax_sub_total[:tax_amount]
+        tax_sub_total_tag.encoded_tag! :TaxInclusiveAmount, tax_sub_total[:tax_inclusive_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxableAmount, tax_sub_total[:already_claimed_taxable_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxAmount, tax_sub_total[:already_claimed_tax_amount]
         tax_sub_total_tag.encoded_tag! :AlreadyClaimedTaxInclusiveAmount, tax_sub_total[:already_claimed_tax_inclusive_amount]
@@ -187,7 +195,7 @@ class ISDOCOutputBuilder
   end
 
   def build_non_taxed_deposits(xml, details)
-    for detail in details
+    details.each do |detail| 
       xml.encoded_tag! :NonTaxedDeposit do |non_taxed_deposit|
         non_taxed_deposit.encoded_tag! :ID, detail[:id]
         non_taxed_deposit.encoded_tag! :VariableSymbol, detail[:variable_symbol]
@@ -197,7 +205,7 @@ class ISDOCOutputBuilder
   end
 
   def build_taxed_deposits(xml, details)
-    for detail in details
+    details.each do |detail|
       xml.encoded_tag! :TaxedDeposit do |taxed_deposit|
         taxed_deposit.encoded_tag! :ID, detail[:id]
         taxed_deposit.encoded_tag! :VariableSymbol, detail[:variable_symbol]

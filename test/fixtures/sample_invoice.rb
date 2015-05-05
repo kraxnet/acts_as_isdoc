@@ -9,7 +9,8 @@ class SampleInvoice < ActiveRecord::Base
     :document_id => :id,
     :document_uuid => "2D6D6400-D922-4DF5-8A76-EB68350B02AF",
     :tax_point_date => "1970-01-01",
-    :note => "Poznamka"
+    :note => "Poznamka",
+    :vat_applicable => "true"
 
   def id
     123

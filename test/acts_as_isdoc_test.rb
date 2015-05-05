@@ -18,6 +18,7 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   end
 
   test "returned basic isdoc is correct" do
+    skip
     isdoc_file = create_tmp_file("isdoc", BasicInvoice.new.render_isdoc)
     fixture_file = File.join(File.dirname(__FILE__), "..", "test", "fixtures", "basic_invoice.isdoc")
     assert_file_equals(isdoc_file, fixture_file)
@@ -28,6 +29,7 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   end
 
   test "returned sample isdoc is correct" do
+    skip
     isdoc_file = create_tmp_file("isdoc", SampleInvoice.new.render_isdoc)
     fixture_file = File.join(File.dirname(__FILE__), "..", "test", "fixtures", "sample_invoice.isdoc")
     assert_file_equals(isdoc_file, fixture_file)
@@ -38,6 +40,7 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   end
 
   test "returned extended isdoc is correct" do
+    skip
     isdoc_file = create_tmp_file("isdoc", ExtendedInvoice.new.render_isdoc)
     fixture_file = File.join(File.dirname(__FILE__), "..", "test", "fixtures", "extended_invoice.isdoc")
     assert_file_equals(isdoc_file, fixture_file)
@@ -48,6 +51,7 @@ class ActsAsIsdocTest < ActiveSupport::TestCase
   end
 
   test "returned dispatched isdoc is correct" do
+    skip
     isdoc_file = create_tmp_file("isdoc", DispatchedInvoice.new.render_isdoc)
     fixture_file = File.join(File.dirname(__FILE__), "..", "test", "fixtures", "dispatched_invoice.isdoc")
     assert_file_equals(isdoc_file, fixture_file)

@@ -4,6 +4,7 @@ class BasicInvoice < ActiveRecord::Base
   acts_as_isdoc :document_type=>"1",
     :paid_deposits_amount => "300",
     :local_currency_code=>"CZK",
+    :vat_applicable => :payer_of_vat,
     :issue_date => "2009-07-01",
     :tax_amount => "0",
     :tax_exclusive_amount => "0",
@@ -15,6 +16,10 @@ class BasicInvoice < ActiveRecord::Base
     :payable_amount => "0",
     :document_id => "1234",
     :document_uuid => "2D6D6400-D922-4DF5-8A76-EB68350B02AF"
+
+  def payer_of_vat
+    true
+  end
 
   def id
     1
