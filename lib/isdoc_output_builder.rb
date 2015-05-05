@@ -97,7 +97,7 @@ class ISDOCOutputBuilder
           end #if payment_means_detail[:payments_mean_code.to_i==42]
         end
         payment_means.encoded_tag! :AlternateBankAccounts do |alternate_bank_accounts|
-          for alternate_bank_account in payment_means_detail[:alternate_bank_accounts]
+          payment_means_detail[:alternate_bank_accounts].each do |alternate_bank_account|
             alternate_bank_accounts.encoded_tag! :AlternateBankAccount do
               build_bank_account(alternate_bank_accounts, alternate_bank_account)
             end
@@ -166,7 +166,7 @@ class ISDOCOutputBuilder
   end
 
   def build_tax_sub_totals(tax_total, tax_sub_totals)
-    for tax_sub_total in tax_sub_totals
+    tax_sub_totals.each do |tax_sub_total|
       tax_total.encoded_tag! :TaxSubTotal do |tax_sub_total_tag|
         tax_sub_total_tag.encoded_tag! :TaxableAmount, tax_sub_total[:taxable_amount]
         tax_sub_total_tag.encoded_tag! :TaxAmount, tax_sub_total[:tax_amount]
@@ -195,7 +195,7 @@ class ISDOCOutputBuilder
   end
 
   def build_non_taxed_deposits(xml, details)
-    for detail in details
+    details.each do |detail| 
       xml.encoded_tag! :NonTaxedDeposit do |non_taxed_deposit|
         non_taxed_deposit.encoded_tag! :ID, detail[:id]
         non_taxed_deposit.encoded_tag! :VariableSymbol, detail[:variable_symbol]
@@ -205,7 +205,7 @@ class ISDOCOutputBuilder
   end
 
   def build_taxed_deposits(xml, details)
-    for detail in details
+    details.each do |detail|
       xml.encoded_tag! :TaxedDeposit do |taxed_deposit|
         taxed_deposit.encoded_tag! :ID, detail[:id]
         taxed_deposit.encoded_tag! :VariableSymbol, detail[:variable_symbol]
