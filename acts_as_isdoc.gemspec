@@ -19,4 +19,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "htmlentities"
   gem.add_dependency "activesupport"
   gem.add_dependency "activerecord"
+
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'sqlite3'
 end
