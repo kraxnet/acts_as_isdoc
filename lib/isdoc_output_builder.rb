@@ -76,9 +76,9 @@ class ISDOCOutputBuilder
         legal_monetary_total.encoded_tag! :AlreadyClaimedTaxInclusiveAmount, already_claimed_tax_inclusive_amount
         legal_monetary_total.encoded_tag! :DifferenceTaxExclusiveAmount, difference_tax_exclusive_amount
         legal_monetary_total.encoded_tag! :DifferenceTaxInclusiveAmount, difference_tax_inclusive_amount
+        legal_monetary_total.encoded_tag! :PayableRoundingAmount, payable_rounding_amount if payable_rounding_amount
         legal_monetary_total.encoded_tag! :PaidDepositsAmount, paid_deposits_amount
         legal_monetary_total.encoded_tag! :PayableAmount, payable_amount
-        legal_monetary_total.encoded_tag! :PayableRoundingAmount, payable_rounding_amount if payable_rounding_amount
       end
 
       invoice.encoded_tag! :PaymentMeans do |payment_means|
