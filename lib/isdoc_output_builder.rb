@@ -130,7 +130,10 @@ class ISDOCOutputBuilder
         register_identification.encoded_tag! :RegisterKeptAt, details[:register_kept_at]
         register_identification.encoded_tag! :RegisterFileRef, details[:register_file_ref]
         register_identification.encoded_tag! :RegisterDate, details[:register_date]
-      end if details[:register_kept_at]
+      end if details[:register_kept_at] and not details[:register_preformatted]
+      party.encoded_tag! :RegisterIdentification do |register_identification|
+        register_identification.encoded_tag! :Preformatted, details[:register_preformatted]
+      end if details[:register_preformatted]
     end
   end
 
